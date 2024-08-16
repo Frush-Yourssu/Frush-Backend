@@ -1,0 +1,11 @@
+from enum import Enum as PyEnum
+
+class Fruit(PyEnum):
+    WATER_MELON = 'WATER_MELON'
+    ORIENTAL_MELON = 'ORIENTAL_MELON'
+    PEACH = 'PEACH'
+
+class FruitPart(PyEnum):
+    WATER_MELON_STEM = 'WATER_MELON_STEM'
+    WATER_MELON_STRIPES = 'WATER_MELON_STRIPES'
+    WATER_MELON_NAVEL = 'WATER_MELON_NAVEL'
