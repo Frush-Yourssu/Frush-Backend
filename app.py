@@ -37,6 +37,10 @@ async def analysis_fruit(
     # 각 과일에 속한 부분이 아니면
     if fruit == Fruit.WATER_MELON and (fruit_part != FruitPart.WATER_MELON_STEM and fruit_part != FruitPart.WATER_MELON_STRIPES and fruit_part != FruitPart.WATER_MELON_NAVEL):
         raise HTTPException(status_code=400, detail="Invalid fruit parts")
+    if fruit == Fruit.ORIENTAL_MELON and (fruit_part != FruitPart.ORIENTAL_MELON_INJURY and fruit_part != FruitPart.ORIENTAL_MELON_NAVEL and fruit_part != FruitPart.ORIENTAL_MELON_OVAL):
+        raise HTTPException(status_code=400, detail="Invalid fruit parts")
+    if fruit == Fruit.PEACH and (fruit_part != FruitPart.PEACH_LINE and fruit_part != FruitPart.PEACH_INJURY and fruit_part != FruitPart.PEACH_RED):
+        raise HTTPException(status_code=400, detail="Invalid fruit parts")
     
     image = load_image_into_numpy_array(await image.read())
     similarity = compare_fruit(fruit=fruit.name, fruit_part=fruit_part.name, comparison_image=image)
