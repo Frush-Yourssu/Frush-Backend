@@ -35,7 +35,7 @@ async def analysis_fruit(
     image: UploadFile = File(...)
 ):
     # 각 과일에 속한 부분이 아니면
-    if fruit == Fruit.WATER_MELON and (fruit_part != FruitPart.WATER_MELON_STEM and fruit_part != FruitPart.WATER_MELON_STRIPES and fruit_part != FruitPart.WATER_MELON_NAVEL):
+    if fruit == Fruit.WATER_MELON and (fruit_part != FruitPart.WATER_MELON_CIRCULAR and fruit_part != FruitPart.WATER_MELON_STRIPES and fruit_part != FruitPart.WATER_MELON_NAVEL):
         raise HTTPException(status_code=400, detail="Invalid fruit parts")
     if fruit == Fruit.ORIENTAL_MELON and (fruit_part != FruitPart.ORIENTAL_MELON_INJURY and fruit_part != FruitPart.ORIENTAL_MELON_NAVEL and fruit_part != FruitPart.ORIENTAL_MELON_OVAL):
         raise HTTPException(status_code=400, detail="Invalid fruit parts")

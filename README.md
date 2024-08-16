@@ -16,9 +16,18 @@ Frush AI 백엔드 서버입니다.
         - ORIENTAL_MELON
         - PEACH
     - fruit_part
-        - WATER_MELON_STEM
-        - WATER_MELON_STRIPES
-        - WATER_MELON_NAVEL
+        - 수박
+            - WATER_MELON_CIRCULAR → 원형
+            - WATER_MELON_STRIPES → 줄무늬
+            - WATER_MELON_NAVEL → 배꼽
+        - 참외
+            - ORIENTAL_MELON_NAVEL → 배꼽
+            - ORIENTAL_MELON_OVAL → 타원형
+            - ORIENTAL_MELON_INJURY → 상처
+        - 복숭아
+            - PEACH_RED → 붉은
+            - PEACH_LINE → 골
+            - PEACH_INJURY → 상처
     - image
         - 유저가 찍은 과일의 특정 부분 사진
 - 응답 예시

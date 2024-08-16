@@ -80,7 +80,7 @@ def compare_fruit(fruit, fruit_part, comparison_image):
     # /Users/ggona/Documents/GitHub/학교/Frush-Backend/data/watermelon/watermelon-stripes.png
     image_paths = {
         ("WATER_MELON", "WATER_MELON_STRIPES"): "/app/data/watermelon/watermelon-stripes.png",
-        ("WATER_MELON", "WATER_MELON_STEM"): "/app/data/watermelon/watermelon-stem.png",
+        ("WATER_MELON", "WATER_MELON_CIRCULAR"): "/app/data/watermelon/watermelon-circular.png",
         ("WATER_MELON", "WATER_MELON_NAVEL"): "/app/data/watermelon/watermelon-navel.png",
         ("ORIENTAL_MELON", "ORIENTAL_MELON_NAVEL"): "/app/data/orientalmelon/orientalmelon-navel.png",
         ("ORIENTAL_MELON", "ORIENTAL_MELON_OVAL"): "/app/data/orientalmelon/orientalmelon-oval.png",
