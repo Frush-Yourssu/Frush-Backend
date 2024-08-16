@@ -86,7 +86,7 @@ def compare_fruit(fruit, fruit_part, comparison_image):
         ("ORIENTAL_MELON", "ORIENTAL_MELON_OVAL"): "/app/data/orientalmelon/orientalmelon-oval.png",
         ("ORIENTAL_MELON", "ORIENTAL_MELON_INJURY"): "/app/data/orientalmelon/orientalmelon-injury.jpg",
         ("PEACH", "PEACH_RED"): "/app/data/peach/peach-red.png",
-        ("PEACH", "PEACH_LINE"): "/Users/ggona/Documents/GitHub/학교/Frush-Backend/data/peach/peach-line.jpg",
+        ("PEACH", "PEACH_LINE"): "/app/data/peach/peach-line.jpg",
         ("PEACH", "PEACH_INJURY"): "/app/data/peach/peach-injury.jpg"
     }
     
