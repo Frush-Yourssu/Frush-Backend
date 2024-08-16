@@ -5,8 +5,9 @@ from typing import List
 from pydantic import BaseModel
 import uvicorn
 from PIL import Image
-from io import BytesIO
+import io
 import numpy as np
+import base64
 
 from utils.fruit import compare_fruit
 from enums.fruit import Fruit, FruitPart
@@ -21,6 +22,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+class FruitAnalysisRequest(BaseModel):
+    fruit: Fruit
+    fruit_part: FruitPart
+    image: str  # Base64 encoded image
+
 class FruitAnalysisResponse(BaseModel):
     fruit: Fruit
     similarity: float
@@ -29,23 +35,22 @@ def load_image_into_numpy_array(data):
     return np.array(Image.open(BytesIO(data)))
 
 @app.post("/fruits", response_model=FruitAnalysisResponse)
-async def analysis_fruit(
-    fruit: Fruit = Form(...),
-    fruit_part: FruitPart = Form(...),
-    image: UploadFile = File(...)
-):
+async def analysis_fruit(request: FruitAnalysisRequest):
     # 각 과일에 속한 부분이 아니면
-    if fruit == Fruit.WATER_MELON and (fruit_part != FruitPart.WATER_MELON_CIRCULAR and fruit_part != FruitPart.WATER_MELON_STRIPES and fruit_part != FruitPart.WATER_MELON_NAVEL):
+    if request.fruit == Fruit.WATER_MELON and (request.fruit_part != FruitPart.WATER_MELON_CIRCULAR and request.fruit_part != FruitPart.WATER_MELON_STRIPES and request.fruit_part != FruitPart.WATER_MELON_NAVEL):
         raise HTTPException(status_code=400, detail="Invalid fruit parts")
-    if fruit == Fruit.ORIENTAL_MELON and (fruit_part != FruitPart.ORIENTAL_MELON_INJURY and fruit_part != FruitPart.ORIENTAL_MELON_NAVEL and fruit_part != FruitPart.ORIENTAL_MELON_OVAL):
+    if request.fruit == Fruit.ORIENTAL_MELON and (request.fruit_part != FruitPart.ORIENTAL_MELON_INJURY and request.fruit_part != FruitPart.ORIENTAL_MELON_NAVEL and request.fruit_part != FruitPart.ORIENTAL_MELON_OVAL):
         raise HTTPException(status_code=400, detail="Invalid fruit parts")
-    if fruit == Fruit.PEACH and (fruit_part != FruitPart.PEACH_LINE and fruit_part != FruitPart.PEACH_INJURY and fruit_part != FruitPart.PEACH_RED):
+    if request.fruit == Fruit.PEACH and (request.fruit_part != FruitPart.PEACH_LINE and request.fruit_part != FruitPart.PEACH_INJURY and request.fruit_part != FruitPart.PEACH_RED):
         raise HTTPException(status_code=400, detail="Invalid fruit parts")
     
-    image = load_image_into_numpy_array(await image.read())
-    similarity = compare_fruit(fruit=fruit.name, fruit_part=fruit_part.name, comparison_image=image)
+    image_data = base64.b64decode(request.image)
+    image = Image.open(io.BytesIO(image_data))
+    image_np = np.array(image)
 
-    return FruitAnalysisResponse(similarity=similarity, fruit=fruit)
+    similarity = compare_fruit(fruit=request.fruit.name, fruit_part=request.fruit_part.name, comparison_image=image_np)
+
+    return FruitAnalysisResponse(similarity=similarity, fruit=request.fruit)
 
 
 if __name__ == "__main__":
